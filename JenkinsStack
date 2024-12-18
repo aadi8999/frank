@@ -2,16 +2,16 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION = 'us-east-1'  // Replace with your desired region
-        STACK_NAME = 'my-ec2-instance'  // Replace with your desired stack name
-        TEMPLATE_FILE = 'cloudformation.yml'  // Replace with your template file path
-        KEY_NAME = 'your-key-pair'  // Replace with your EC2 key pair name
+        AWS_REGION = 'us-east-1'
+        STACK_NAME = 'my-ec2-instance'  
+        TEMPLATE_FILE = 'cloudformation.yml' 
+        KEY_NAME = 'EC2InstanceUsingCloudFormationWithJenkins' 
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-repo.git'  // Replace with your repository URL
+                git branch: 'main', url: ''  // Replace with your repository URL
             }
         }
 
