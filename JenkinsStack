@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = 'us-east-1'  // Replace with your desired region
+        STACK_NAME = 'my-ec2-instance'  // Replace with your desired stack name
+        TEMPLATE_FILE = 'cloudformation.yml'  // Replace with your template file path
+        KEY_NAME = 'your-key-pair'  // Replace with your EC2 key pair name
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/your-repo.git'  // Replace with your repository URL
+            }
+        }
+
+        stage('Install AWS CLI') {
+            steps {
+                sh 'sudo apt update'
+                sh 'sudo apt install awscli -y'
+            }
+        }
+
+        stage('Create CloudFormation Stack') {
+            steps {
+                script {
+                    def params = "ParameterKey=KeyName,ParameterValue=${KEY_NAME}"
+                    sh """
+                    aws cloudformation create-stack --region ${AWS_REGION} --stack-name ${STACK_NAME} --template-body file://${TEMPLATE_FILE} --parameters ${params}
+                    """
+                }
+            }
+        }
+    }
+}
