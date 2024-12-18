@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an EC2 instance from an existing Ubuntu AMI
+
+Parameters:
+  KeyName:
+    Description: Crating cloudFormation stack using jekings
+    Type: AWS::EC2::KeyPair::KeyName
+
+Resources:
+  CloudFormationStack:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      SecurityGroups:
+        - !Ref sg-0dfc65a8a78a0eacd
+      ImageId: ami-0e2c8caa4b6378d8c
+
+Outputs:
+  InstanceId:
+    Description: The Instance ID
+    Value: !Ref CloudFormationStack
