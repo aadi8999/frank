@@ -27,8 +27,8 @@ pipeline {
                 script {
                     def params = "ParameterKey=KeyName,ParameterValue=${KEY_NAME}"
                     sh """
-                    aws cloudformation create-stack --region ${AWS_REGION} --stack-name ${STACK_NAME} --template-body file://${TEMPLATE_FILE} --parameters ${params}
-                    """
+                    aws cloudformation create-stack --region us-east-1 --stack-name CloudFormationStack --template-body file://https://github.com/aadi8999/frank.git
+        
                 }
             }
         }
