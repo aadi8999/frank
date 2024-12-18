@@ -4,14 +4,14 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'
         STACK_NAME = 'my-ec2-instance'  
-        TEMPLATE_FILE = 'cloudformation.yml' 
+        TEMPLATE_FILE = 'CloudformationStack.yml' 
         KEY_NAME = 'EC2InstanceUsingCloudFormationWithJenkins' 
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: ''  // Replace with your repository URL
+                git branch: 'main', url: 'https://github.com/aadi8999/frank.git'
             }
         }
 
